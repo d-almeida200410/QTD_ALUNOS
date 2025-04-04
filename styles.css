@@ -1,0 +1,339 @@
+:root {
+    --primary: #6C5CE7;
+    --primary-light: #8579e9;
+    --secondary: #00B894;
+    --danger: #FF7675;
+    --warning: #FDCB6E;
+    --dark: #2D3436;
+    --light: #F5F6FA;
+    --text: #2D3436;
+    --text-light: #FFFFFF;
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Estilos base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--text);
+    padding: 20px;
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+/* Logo circular */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--primary);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.logo-circle:hover {
+    transform: scale(1.05) rotate(5deg);
+    border-color: var(--secondary);
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Títulos com gradiente */
+.gradient-text {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+/* Card de resumo */
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.total-box {
+    background: linear-gradient(45deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+
+.total-label {
+    font-size: 1.1rem;
+}
+
+.total-number {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.period-summary {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.period-badge {
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.manha-badge {
+    background: linear-gradient(45deg, var(--warning), #ffeaa7);
+    color: var(--dark);
+}
+
+.tarde1-badge {
+    background: linear-gradient(45deg, var(--danger), #ff9a9a);
+    color: white;
+}
+
+.tarde2-badge {
+    background: linear-gradient(45deg, #FF8C00, #FFA500);
+    color: white;
+}
+
+.tarde3-badge {
+    background: linear-gradient(45deg, #0984e3, #74b9ff);
+    color: white;
+}
+
+/* Abas de período */
+.period-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(108, 92, 231, 0.1);
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    background: rgba(108, 92, 231, 0.2);
+}
+
+.tab-btn.active {
+    background: linear-gradient(45deg, var(--primary), var(--primary-light));
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* Lista de alunos */
+.alunos-container {
+    position: relative;
+    min-height: 300px;
+}
+
+.aluno-list {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.aluno-list.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.list-header h2 {
+    font-size: 1.3rem;
+    color: var(--dark);
+}
+
+.count-badge {
+    background: var(--primary);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.alunos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.aluno-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    border-left: 4px solid var(--primary);
+}
+
+.aluno-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.aluno-nome {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.aluno-info {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.aluno-dias, .aluno-valor {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.aluno-dias {
+    color: var(--primary);
+}
+
+.aluno-valor {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.no-alunos {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+    padding: 40px 0;
+    grid-column: 1 / -1;
+}
+
+/* Estilos específicos para cada lista */
+.manha-list .aluno-card {
+    border-left-color: var(--warning);
+}
+.tarde1-list .aluno-card {
+    border-left-color: var(--danger);
+}
+.tarde2-list .aluno-card {
+    border-left-color: #FF8C00;
+}
+.tarde3-list .aluno-card {
+    border-left-color: #0984e3;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .summary-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .period-summary {
+        width: 100%;
+    }
+    
+    .alunos-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .alunos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .period-tabs {
+        gap: 5px;
+    }
+    
+    .tab-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .period-badge {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+}

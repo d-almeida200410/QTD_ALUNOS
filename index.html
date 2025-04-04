@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Alunos por Horário</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="img/coruja.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="logo-container animate__animated animate__bounceIn">
+        <img src="img/logo.png" alt="Logo Escola" class="logo-circle">
+    </div>
+
+    <div class="container animate__animated animate__fadeInUp">
+        <h1><span class="gradient-text">Alunos Matriculados por Horário</span></h1>
+        
+        <div class="summary-card">
+            <div class="total-box">
+                <span class="total-label">Total de Alunos:</span>
+                <span class="total-number" id="totalAlunos">0</span>
+            </div>
+            <div class="period-summary">
+                <div class="period-badge manha-badge">
+                    <span>🌞 Manhã: </span>
+                    <span id="manhaCount">0</span>
+                </div>
+                <div class="period-badge tarde1-badge">
+                    <span>🌇 14h-16h: </span>
+                    <span id="tarde1Count">0</span>
+                </div>
+                <div class="period-badge tarde2-badge">
+                    <span>🌆 16h-18h: </span>
+                    <span id="tarde2Count">0</span>
+                </div>
+                <div class="period-badge tarde3-badge">
+                    <span>🌃 18h-20h: </span>
+                    <span id="tarde3Count">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="period-tabs">
+            <button class="tab-btn active" data-period="manha">🌞 Manhã</button>
+            <button class="tab-btn" data-period="tarde1">🌇 14h-16h</button>
+            <button class="tab-btn" data-period="tarde2">🌆 16h-18h</button>
+            <button class="tab-btn" data-period="tarde3">🌃 18h-20h</button>
+        </div>
+        
+        <div class="alunos-container">
+            <!-- Manhã -->
+            <div class="aluno-list manha-list active">
+                <div class="list-header">
+                    <h2>Alunos - Período da Manhã</h2>
+                    <span class="count-badge" id="manhaBadge">0 alunos</span>
+                </div>
+                <div class="alunos-grid" id="manhaList">
+                    <div class="no-alunos">Nenhum aluno matriculado neste período</div>
+                </div>
+            </div>
+            
+            <!-- Tarde 1 -->
+            <div class="aluno-list tarde1-list">
+                <div class="list-header">
+                    <h2>Alunos - Tarde (14h-16h)</h2>
+                    <span class="count-badge" id="tarde1Badge">0 alunos</span>
+                </div>
+                <div class="alunos-grid" id="tarde1List">
+                    <div class="no-alunos">Nenhum aluno matriculado neste período</div>
+                </div>
+            </div>
+            
+            <!-- Tarde 2 -->
+            <div class="aluno-list tarde2-list">
+                <div class="list-header">
+                    <h2>Alunos - Tarde (16h-18h)</h2>
+                    <span class="count-badge" id="tarde2Badge">0 alunos</span>
+                </div>
+                <div class="alunos-grid" id="tarde2List">
+                    <div class="no-alunos">Nenhum aluno matriculado neste período</div>
+                </div>
+            </div>
+            
+            <!-- Tarde 3 -->
+            <div class="aluno-list tarde3-list">
+                <div class="list-header">
+                    <h2>Alunos - Tarde (18h-20h)</h2>
+                    <span class="count-badge" id="tarde3Badge">0 alunos</span>
+                </div>
+                <div class="alunos-grid" id="tarde3List">
+                    <div class="no-alunos">Nenhum aluno matriculado neste período</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="controle-alunos.js"></script>
+</body>
+</html>
