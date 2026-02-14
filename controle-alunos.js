@@ -23,21 +23,30 @@ document.addEventListener('DOMContentLoaded', function() {
         tarde2Count: document.getElementById('tarde2Count'),
         tarde3Count: document.getElementById('tarde3Count'),
         manhaBadge: document.getElementById('manhaBadge'),
-        tarde0Count: document.getElementById('tarde0Count'),
+        tarde0Badge: document.getElementById('tarde0Badge'),
         tarde1Badge: document.getElementById('tarde1Badge'),
         tarde2Badge: document.getElementById('tarde2Badge'),
         tarde3Badge: document.getElementById('tarde3Badge'),
-        manhaList: document.querySelector('#manhaList.alunos-grid'),
-        tarde0List: document.querySelector('#tarde0List.alunos-grid'),
-        tarde1List: document.querySelector('#tarde1List.alunos-grid'),
-        tarde2List: document.querySelector('#tarde2List.alunos-grid'),
-        tarde3List: document.querySelector('#tarde3List.alunos-grid'),
+        manhaList: document.getElementById('manhaList'),
+        tarde0List: document.getElementById('tarde0List'),
+        tarde1List: document.getElementById('tarde1List'),
+        tarde2List: document.getElementById('tarde2List'),
+        tarde3List: document.getElementById('tarde3List'),
         tabButtons: document.querySelectorAll('.tab-btn'),
         alunoLists: document.querySelectorAll('.aluno-list')
     };
 
     // Variáveis de estado
     let alunosData = [];
+
+    // Mapeamento de períodos
+    const periodoMap = {
+        'manha': 'Manhã',
+        'tarde0': 'Tarde (14h-15:30h)',
+        'tarde1': 'Tarde (14h-16h)',
+        'tarde2': 'Tarde (16h-18h)',
+        'tarde3': 'Tarde (18h-20h)'
+    };
 
     // Inicializar abas
     function initTabs() {
@@ -71,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 alunosData.push(aluno);
             });
             
+            console.log("Alunos carregados:", alunosData.length); // Debug
+            
             atualizarResumo();
             
             // Atualiza apenas a lista do período ativo
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Verificar se o aluno tem a estrutura nova (horarios)
             if (aluno.horarios && aluno.horarios.length > 0) {
                 aluno.horarios.forEach(horario => {
-                    if (contadorPeriodos.hasOwnProperty(horario.periodo)) {
+                    if (horario && horario.periodo && contadorPeriodos.hasOwnProperty(horario.periodo)) {
                         contadorPeriodos[horario.periodo]++;
                     }
                 });
@@ -110,39 +121,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         const total = alunosData.length;
-        elements.totalAlunos.textContent = total;
         
-        elements.manhaCount.textContent = contadorPeriodos['Manhã'];
-        elements.tarde1Count.textContent = contadorPeriodos['Tarde (14h-15:30h)'];
-        elements.tarde1Count.textContent = contadorPeriodos['Tarde (14h-16h)'];
-        elements.tarde2Count.textContent = contadorPeriodos['Tarde (16h-18h)'];
-        elements.tarde3Count.textContent = contadorPeriodos['Tarde (18h-20h)'];
+        // Atualizar total
+        if (elements.totalAlunos) elements.totalAlunos.textContent = total;
         
-        elements.manhaBadge.textContent = `${contadorPeriodos['Manhã']} aluno${contadorPeriodos['Manhã'] !== 1 ? 's' : ''}`;
-        elements.tarde1Badge.textContent = `${contadorPeriodos['Tarde (14h-15:30h)']} aluno${contadorPeriodos['Tarde (14h-15:30h)'] !== 1 ? 's' : ''}`;
-        elements.tarde1Badge.textContent = `${contadorPeriodos['Tarde (14h-16h)']} aluno${contadorPeriodos['Tarde (14h-16h)'] !== 1 ? 's' : ''}`;
-        elements.tarde2Badge.textContent = `${contadorPeriodos['Tarde (16h-18h)']} aluno${contadorPeriodos['Tarde (16h-18h)'] !== 1 ? 's' : ''}`;
-        elements.tarde3Badge.textContent = `${contadorPeriodos['Tarde (18h-20h)']} aluno${contadorPeriodos['Tarde (18h-20h)'] !== 1 ? 's' : ''}`;
+        // Atualizar contadores no card superior
+        if (elements.manhaCount) elements.manhaCount.textContent = contadorPeriodos['Manhã'];
+        if (elements.tarde0Count) elements.tarde0Count.textContent = contadorPeriodos['Tarde (14h-15:30h)'];
+        if (elements.tarde1Count) elements.tarde1Count.textContent = contadorPeriodos['Tarde (14h-16h)'];
+        if (elements.tarde2Count) elements.tarde2Count.textContent = contadorPeriodos['Tarde (16h-18h)'];
+        if (elements.tarde3Count) elements.tarde3Count.textContent = contadorPeriodos['Tarde (18h-20h)'];
+        
+        // Atualizar badges dentro das listas
+        if (elements.manhaBadge) elements.manhaBadge.textContent = `${contadorPeriodos['Manhã']} aluno${contadorPeriodos['Manhã'] !== 1 ? 's' : ''}`;
+        if (elements.tarde0Badge) elements.tarde0Badge.textContent = `${contadorPeriodos['Tarde (14h-15:30h)']} aluno${contadorPeriodos['Tarde (14h-15:30h)'] !== 1 ? 's' : ''}`;
+        if (elements.tarde1Badge) elements.tarde1Badge.textContent = `${contadorPeriodos['Tarde (14h-16h)']} aluno${contadorPeriodos['Tarde (14h-16h)'] !== 1 ? 's' : ''}`;
+        if (elements.tarde2Badge) elements.tarde2Badge.textContent = `${contadorPeriodos['Tarde (16h-18h)']} aluno${contadorPeriodos['Tarde (16h-18h)'] !== 1 ? 's' : ''}`;
+        if (elements.tarde3Badge) elements.tarde3Badge.textContent = `${contadorPeriodos['Tarde (18h-20h)']} aluno${contadorPeriodos['Tarde (18h-20h)'] !== 1 ? 's' : ''}`;
     }
     
     // Atualizar lista específica de um período
     function atualizarListaEspecifica(periodo) {
-        const periodoMap = {
-            'manha': 'Manhã',
-            'tarde0': 'Tarde (14h-15:30h)',
-            'tarde1': 'Tarde (14h-16h)',
-            'tarde2': 'Tarde (16h-18h)',
-            'tarde3': 'Tarde (18h-20h)'
-        };
-        
         const periodoNome = periodoMap[periodo];
+        if (!periodoNome) return;
+        
         const listaElement = elements[`${periodo}List`];
+        if (!listaElement) return;
         
         // Filtrar alunos que pertencem a este período
         const alunosPeriodo = alunosData.filter(aluno => {
             // Verificar estrutura nova (horarios)
             if (aluno.horarios && aluno.horarios.length > 0) {
-                return aluno.horarios.some(h => h.periodo === periodoNome);
+                return aluno.horarios.some(h => h && h.periodo === periodoNome);
             }
             // Verificar estrutura antiga (periodo direto)
             return aluno.periodo === periodoNome;
@@ -155,15 +165,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let html = '';
         
-        // Agrupar por horários específicos (se existirem)
+        // Agrupar por dias/horários
         const gruposHorarios = {};
         
         alunosPeriodo.forEach(aluno => {
-            // Estrutura nova (horarios)
             if (aluno.horarios && aluno.horarios.length > 0) {
                 aluno.horarios.forEach(horario => {
-                    if (horario.periodo === periodoNome) {
-                        const dias = Array.isArray(horario.dias) ? horario.dias.join(', ') : horario.dias;
+                    if (horario && horario.periodo === periodoNome) {
+                        const dias = Array.isArray(horario.dias) ? horario.dias.join(', ') : (horario.dias || 'Dias não especificados');
                         const chaveHorario = `${periodoNome} - ${dias}`;
                         
                         if (!gruposHorarios[chaveHorario]) {
@@ -173,10 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         gruposHorarios[chaveHorario].push(aluno);
                     }
                 });
-            } 
-            // Estrutura antiga (periodo e dias separados)
-            else {
-                const dias = Array.isArray(aluno.dias) ? aluno.dias.join(', ') : aluno.dias || 'Sem dias definidos';
+            } else {
+                const dias = Array.isArray(aluno.dias) ? aluno.dias.join(', ') : (aluno.dias || 'Dias não especificados');
                 const chaveHorario = `${periodoNome} - ${dias}`;
                 
                 if (!gruposHorarios[chaveHorario]) {
@@ -187,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Ordenar os horários
+        // Ordenar horários
         const horariosOrdenados = Object.keys(gruposHorarios).sort();
         
         horariosOrdenados.forEach(chaveHorario => {
