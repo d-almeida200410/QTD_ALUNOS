@@ -3,6 +3,7 @@
     --primary-light: #8579e9;
     --secondary: #00B894;
     --danger: #FF7675;
+    --rec: #2bff00;
     --warning: #FDCB6E;
     --dark: #2D3436;
     --light: #F5F6FA;
@@ -132,6 +133,12 @@ h1 {
     background: linear-gradient(45deg, var(--warning), #ffeaa7);
     color: var(--dark);
 }
+
+.tarde0-badge {
+    background: linear-gradient(45deg, var(--rec), #51ff88);
+    color: white;
+}
+
 
 .tarde1-badge {
     background: linear-gradient(45deg, var(--danger), #ff9a9a);

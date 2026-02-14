@@ -18,14 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const elements = {
         totalAlunos: document.getElementById('totalAlunos'),
         manhaCount: document.getElementById('manhaCount'),
+        tarde0Count: document.getElementById('tarde0Count'),
         tarde1Count: document.getElementById('tarde1Count'),
         tarde2Count: document.getElementById('tarde2Count'),
         tarde3Count: document.getElementById('tarde3Count'),
         manhaBadge: document.getElementById('manhaBadge'),
+        tarde0Count: document.getElementById('tarde0Count'),
         tarde1Badge: document.getElementById('tarde1Badge'),
         tarde2Badge: document.getElementById('tarde2Badge'),
         tarde3Badge: document.getElementById('tarde3Badge'),
         manhaList: document.querySelector('#manhaList.alunos-grid'),
+        tarde0List: document.querySelector('#tarde0List.alunos-grid'),
         tarde1List: document.querySelector('#tarde1List.alunos-grid'),
         tarde2List: document.querySelector('#tarde2List.alunos-grid'),
         tarde3List: document.querySelector('#tarde3List.alunos-grid'),
@@ -84,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function atualizarResumo() {
         const contadorPeriodos = {
             'Manhã': 0,
+            'Tarde (14h-15:30h)': 0,
             'Tarde (14h-16h)': 0,
             'Tarde (16h-18h)': 0,
             'Tarde (18h-20h)': 0
@@ -109,11 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.totalAlunos.textContent = total;
         
         elements.manhaCount.textContent = contadorPeriodos['Manhã'];
+        elements.tarde1Count.textContent = contadorPeriodos['Tarde (14h-15:30h)'];
         elements.tarde1Count.textContent = contadorPeriodos['Tarde (14h-16h)'];
         elements.tarde2Count.textContent = contadorPeriodos['Tarde (16h-18h)'];
         elements.tarde3Count.textContent = contadorPeriodos['Tarde (18h-20h)'];
         
         elements.manhaBadge.textContent = `${contadorPeriodos['Manhã']} aluno${contadorPeriodos['Manhã'] !== 1 ? 's' : ''}`;
+        elements.tarde1Badge.textContent = `${contadorPeriodos['Tarde (14h-15:30h)']} aluno${contadorPeriodos['Tarde (14h-15:30h)'] !== 1 ? 's' : ''}`;
         elements.tarde1Badge.textContent = `${contadorPeriodos['Tarde (14h-16h)']} aluno${contadorPeriodos['Tarde (14h-16h)'] !== 1 ? 's' : ''}`;
         elements.tarde2Badge.textContent = `${contadorPeriodos['Tarde (16h-18h)']} aluno${contadorPeriodos['Tarde (16h-18h)'] !== 1 ? 's' : ''}`;
         elements.tarde3Badge.textContent = `${contadorPeriodos['Tarde (18h-20h)']} aluno${contadorPeriodos['Tarde (18h-20h)'] !== 1 ? 's' : ''}`;
@@ -123,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function atualizarListaEspecifica(periodo) {
         const periodoMap = {
             'manha': 'Manhã',
+            'tarde0': 'Tarde (14h-15:30h)',
             'tarde1': 'Tarde (14h-16h)',
             'tarde2': 'Tarde (16h-18h)',
             'tarde3': 'Tarde (18h-20h)'

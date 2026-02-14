@@ -28,6 +28,10 @@
                     <span>🌞 Manhã: </span>
                     <span id="manhaCount">0</span>
                 </div>
+                <div class="period-badge tarde0-badge">
+                    <span>🌇 14h-15:30h: </span>
+                    <span id="tarde1Count">0</span>
+                </div>
                 <div class="period-badge tarde1-badge">
                     <span>🌇 14h-16h: </span>
                     <span id="tarde1Count">0</span>
@@ -45,6 +49,7 @@
         
         <div class="period-tabs">
             <button class="tab-btn active" data-period="manha">🌞 Manhã</button>
+            <button class="tab-btn" data-period="tarde0">🌇 14h-15:30h</button>
             <button class="tab-btn" data-period="tarde1">🌇 14h-16h</button>
             <button class="tab-btn" data-period="tarde2">🌆 16h-18h</button>
             <button class="tab-btn" data-period="tarde3">🌃 18h-20h</button>
@@ -58,6 +63,17 @@
                     <span class="count-badge" id="manhaBadge">0 alunos</span>
                 </div>
                 <div class="alunos-grid" id="manhaList">
+                    <div class="no-alunos">Nenhum aluno matriculado neste período</div>
+                </div>
+            </div>
+
+            <!-- Tarde 0 -->
+            <div class="aluno-list tarde0-list">
+                <div class="list-header">
+                    <h2>Alunos - Tarde (14h-15:30h)</h2>
+                    <span class="count-badge" id="tarde0Badge">0 alunos</span>
+                </div>
+                <div class="alunos-grid" id="tarde0List">
                     <div class="no-alunos">Nenhum aluno matriculado neste período</div>
                 </div>
             </div>
